@@ -17,27 +17,33 @@ catch(error){
 }
 getuserdata()
 .then((data1) => {
+      const maindiv = document.createElement("div");
+    maindiv.setAttribute("class","col")
     const div = document.createElement("div");
+    div.setAttribute("class","navbar navbar-dark bg-primary text-white p-2")
     div.innerHTML =" Users List"
-    document.body.append(div);
+    maindiv.appendChild(div);
+    // document.body.append(maindiv);
+    const rowDiv = document.createElement("div"); //bootstap-grid
+    rowDiv.setAttribute("class","row m-3")
     for (var i = 0; i < data1.length; i++) {
       //console.log(data1[i])
-      const div = document.createElement("div");
-      div.innerHTML = `<div class="row">
-        <div class="col">
+     const colDiv = document.createElement("div");
+     colDiv.setAttribute("class","col-6 col-md-4")
+     colDiv.innerHTML = `
           <div class="card">
             <div class="card-body">
             <p class="card-text"><b><i>Name: ${data1[i].name}</i></b></p>
-              <p class="card-text"><b><i>E-mail: ${data1[i].email}</i></b></p>
-              <p class="card-text"><b><i>Street: ${data1[i].address.street}</b></p>
-              <p class="card-text"><b><i>City: ${data1[i].address.city}</i></b></p>
+              <p class="card-text"><i>E-mail: ${data1[i].email}</i></p>
+              <p class="card-text"><i>Street: ${data1[i].address.street}</i></p>
+              <p class="card-text"><i>City: ${data1[i].address.city}</i></p>
           
             </div>
-          </div>
-        </div>
-        </div>`;
-      document.body.append(div);
+          </div>`;
+      rowDiv.appendChild(colDiv);
     }
+  maindiv.appendChild(rowDiv);
+  document.body.append(maindiv);
   })
   .catch(error => {
     console.error("An error occurred:", error);
